@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Switch , Route , Redirect } from 'react-router-dom';
 
-function App() {
+// Components
+import Store from './components/Store';
+import ProductsDetail from './components/ProductsDetail';
+import Navbar from './components/Shared/Navbar';
+import ShopCart from './components/ShopCart';
+
+// Context
+import ProductContextProvider from './context/ProductContextProvider';
+import CartContextProvider from './context/CartContextProvider';
+
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <ProductContextProvider> {/* 14 */}
+        <CartContextProvider> {/* 39 */}
+        <Navbar /> {/* 48 */}
+      <Switch> {/* 24 */}
+
+
+        <Route path='/products/:id' component={ProductsDetail} /> {/* 27 */}
+        <Route path='/products' component={Store} /> {/* 25 */}
+        {/* <Store />  16 */}
+        <Route path='/cart' component={ShopCart} /> {/* 50 */}
+        <Redirect to='/products' /> {/* 26 */}
+
+      </Switch>
+        </CartContextProvider>
+      </ProductContextProvider>
     </div>
   );
-}
+};
 
 export default App;
